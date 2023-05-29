@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import LoginPage from "./pages/LoginPage/LoginPage.js";
+import AuthContext from "./context/auth.context.js";
+import styled from "styled-components";
+import { useState } from "react";
+import RegisterPage from "./pages/RegisterPage/RegisterPage.js";
+import UserPage from "./pages/UserPage/UserPage.js";
 
-function App() {
+export default function App() {
+  const [userInfo, setUserInfo]=useState({token: "", username: "", photo: ""})
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MyPage>
+      <BrowserRouter>
+        <AuthContext.Provider value={{userInfo, setUserInfo}}>
+          <Routes>
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/me" element={<UserPage />} />
+          </Routes>
+        </AuthContext.Provider>
+      </BrowserRouter>
+    </MyPage>
   );
 }
 
-export default App;
+const MyPage = styled.div`
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: scroll;
+`;
