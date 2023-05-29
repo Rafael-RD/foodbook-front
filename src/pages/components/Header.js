@@ -7,7 +7,7 @@ export default function Header(){
 
     return(
         <MyHeader>
-            <span>FoodBook</span>
+            <span>Foodbook</span>
             <button>logout</button>
             <div>
                 <span>{`Ola, ${username}`}</span>
@@ -22,6 +22,7 @@ const MyHeader=styled.header`
     height: 60px;
     display: flex;
     align-items: center;
+    background: white;
     justify-content: space-between;
     padding: 0 10px;
     margin-bottom: 20px;
